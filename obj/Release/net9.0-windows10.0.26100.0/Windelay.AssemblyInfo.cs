@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCopyrightAttribute("Copyright Reis Production 2025")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Windelay")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("25.5.1.4")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("25.5.1+3be27e5582412f43f674c45b8d199c9402748355")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("25.5.1+703a7b7380d3a6835bfee19f05c175d95fb76376")]
 [assembly: System.Reflection.AssemblyProductAttribute("ReisProduction")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Windelay")]
 [assembly: System.Reflection.AssemblyVersionAttribute("25.5.1.4")]

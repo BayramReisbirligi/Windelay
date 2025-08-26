@@ -1,4 +1,5 @@
 ﻿using static ReisProduction.Windelay.Services.Interop;
+using ReisProduction.Windelay.Utilities.Enums;
 using ReisProduction.Windelay.Utilities;
 using System.Diagnostics;
 namespace ReisProduction.Windelay.Models;
@@ -6,6 +7,24 @@ public static class DelayExecutor
 {
     public static int SpinWaitIterations { get; set; } = Math.Clamp(200 / Environment.ProcessorCount, 25, 100);
     public static int SpinAheadMilisecond { get; set; } = 0;
+    public static async Task HandleDelay(DelayAction delay)
+    {
+        switch (delay.DelayType)
+        {
+            case DelayType.HybridDelay: await HybridDelay(delay); break;
+            case DelayType.HighResSpin: HighResSpin(delay); break;
+            case DelayType.SpinDelay: SpinDelay(delay); break;
+            case DelayType.WaitableTimer: WaitableTimer(delay); break;
+            case DelayType.HighResSleep: HighResSleep(delay); break;
+            case DelayType.SleepDelay: SleepDelay(delay); break;
+            case DelayType.TaskDelay: await TaskDelay(delay); break;
+            case DelayType.TaskDelayWait: TaskDelayWait(delay); break;
+            case DelayType.EventWaitHandle: EventWaitHandle(delay); break;
+            case DelayType.TimersTimerDelay: await TimersTimerDelay(delay); break;
+            case DelayType.TimerDelay: await TimerDelay(delay); break;
+            case DelayType.FormsTimerDelay: await FormsTimerDelay(delay); break;
+        }
+    }
     public static async Task HybridDelay(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
@@ -15,19 +34,19 @@ public static class DelayExecutor
         while (sw.Elapsed.TotalMilliseconds < delay.DelayMilisecond && !delay.Token.IsCancellationRequested)
             Thread.SpinWait(SpinWaitIterations);
     }
-    public static void SpinDelay(DelayAction delay)
-    {
-        if (delay.DelayMilisecond <= 0) return;
-        var sw = Stopwatch.StartNew();
-        while (sw.Elapsed.TotalMilliseconds < delay.DelayMilisecond && !delay.Token.IsCancellationRequested)
-            Thread.SpinWait(SpinWaitIterations);
-    }
     public static void HighResSpin(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
         long freq = Stopwatch.Frequency,
            target = Stopwatch.GetTimestamp() + delay.DelayMilisecond * freq / 1000;
         while (Stopwatch.GetTimestamp() < target && !delay.Token.IsCancellationRequested)
+            Thread.SpinWait(SpinWaitIterations);
+    }
+    public static void SpinDelay(DelayAction delay)
+    {
+        if (delay.DelayMilisecond <= 0) return;
+        var sw = Stopwatch.StartNew();
+        while (sw.Elapsed.TotalMilliseconds < delay.DelayMilisecond && !delay.Token.IsCancellationRequested)
             Thread.SpinWait(SpinWaitIterations);
     }
     public static void WaitableTimer(DelayAction delay)
@@ -55,21 +74,21 @@ public static class DelayExecutor
         if (delay.DelayMilisecond <= 0) return;
         Thread.Sleep(delay.DelayMilisecond);
     }
+    public static async Task TaskDelay(DelayAction delay)
+    {
+        if (delay.DelayMilisecond <= 0) return;
+        await Task.Delay(delay.DelayMilisecond, delay.Token);
+    }
     public static void TaskDelayWait(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
         Task.Delay(delay.DelayMilisecond, delay.Token).Wait(delay.Token);
     }
-    public static void EventWaitHandleDelay(DelayAction delaya)
-    {
-        if (delaya.DelayMilisecond <= 0) return;
-        using ManualResetEventSlim ev = new(false);
-        ev.Wait(delaya.DelayMilisecond, delaya.Token);
-    }
-    public static async Task TaskDelay(DelayAction delay)
+    public static void EventWaitHandle(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
-        await Task.Delay(delay.DelayMilisecond, delay.Token);
+        using ManualResetEventSlim ev = new(false);
+        ev.Wait(delay.DelayMilisecond, delay.Token);
     }
     public static async Task TimersTimerDelay(DelayAction delay)
     {
