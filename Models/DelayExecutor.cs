@@ -6,7 +6,7 @@ namespace ReisProduction.Windelay.Models;
 public static class DelayExecutor
 {
     public static int SpinWaitIterations { get; set; } = Math.Clamp(200 / Environment.ProcessorCount, 25, 100);
-    public static int SpinAheadMilisecond { get; set; } = 0;
+    public static int SpinAheadMilisecond { get; set; } = 200;
     public static async Task HandleDelay(DelayAction delay)
     {
         switch (delay.DelayType)
