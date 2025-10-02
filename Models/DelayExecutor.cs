@@ -3,10 +3,11 @@ using ReisProduction.Windelay.Utilities.Enums;
 using ReisProduction.Windelay.Utilities;
 using System.Diagnostics;
 namespace ReisProduction.Windelay.Models;
-public static class DelayExecutor
+public static partial class DelayExecutor
 {
-    public static int SpinWaitIterations { get; set; } = Math.Clamp(200 / Environment.ProcessorCount, 25, 100);
-    public static int SpinAheadMilisecond { get; set; } = 200;
+    /// <summary>
+    /// General method to handle various delay types.
+    /// </summary>
     public static async Task HandleDelay(DelayAction delay)
     {
         switch (delay.DelayType)
@@ -25,6 +26,10 @@ public static class DelayExecutor
             case DelayType.FormsTimerDelay: await FormsTimerDelay(delay); break;
         }
     }
+    /// <summary>
+    /// Hybrid delay method that combines Task.Delay and SpinWait for improved accuracy.
+    /// Better for medium to long delays while maintaining accuracy.
+    /// </summary>
     public static async Task HybridDelay(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
@@ -34,6 +39,11 @@ public static class DelayExecutor
         while (sw.Elapsed.TotalMilliseconds < delay.DelayMilisecond && !delay.Token.IsCancellationRequested)
             Thread.SpinWait(SpinWaitIterations);
     }
+    /// <summary>
+    /// High-resolution spin wait method using Stopwatch for timing.
+    /// Blocks the thread but provides better accuracy for short delays.
+    /// Do not use for long delays to avoid high CPU usage and block thread.
+    /// </summary>
     public static void HighResSpin(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
@@ -42,6 +52,11 @@ public static class DelayExecutor
         while (Stopwatch.GetTimestamp() < target && !delay.Token.IsCancellationRequested)
             Thread.SpinWait(SpinWaitIterations);
     }
+    /// <summary>
+    /// System.Threading.SpinWait method for timing.
+    /// Blocks the thread but is less accurate than HighResSpin.
+    /// Do not use for long delays to avoid high CPU usage and block thread.
+    /// </summary>
     public static void SpinDelay(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
@@ -49,6 +64,9 @@ public static class DelayExecutor
         while (sw.Elapsed.TotalMilliseconds < delay.DelayMilisecond && !delay.Token.IsCancellationRequested)
             Thread.SpinWait(SpinWaitIterations);
     }
+    /// <summary>
+    /// Waitable timer method using Windows API for timing.
+    /// </summary>
     public static void WaitableTimer(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
@@ -62,6 +80,9 @@ public static class DelayExecutor
         }
         finally { CloseHandle(handle); }
     }
+    /// <summary>
+    /// High-resolution sleep method using timeBeginPeriod and timeEndPeriod for timing.
+    /// </summary>
     public static void HighResSleep(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
@@ -69,27 +90,42 @@ public static class DelayExecutor
         Thread.Sleep(delay.DelayMilisecond);
         _ = timeEndPeriod(1);
     }
+    /// <summary>
+    /// System.Threading.Sleep method using Thread.Sleep for timing.
+    /// </summary>
     public static void SleepDelay(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
         Thread.Sleep(delay.DelayMilisecond);
     }
+    /// <summary>
+    /// System.Threading.Tasks.Task.Delay method for timing.
+    /// </summary>
     public static async Task TaskDelay(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
         await Task.Delay(delay.DelayMilisecond, delay.Token);
     }
+    /// <summary>
+    /// System.Threading.Tasks.Task.Delay method with Wait for timing.
+    /// </summary>
     public static void TaskDelayWait(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
         Task.Delay(delay.DelayMilisecond, delay.Token).Wait(delay.Token);
     }
+    /// <summary>
+    /// EventWaitHandle method using ManualResetEventSlim for timing.
+    /// </summary>
     public static void EventWaitHandle(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
         using ManualResetEventSlim ev = new(false);
         ev.Wait(delay.DelayMilisecond, delay.Token);
     }
+    /// <summary>
+    /// Timers.Timer method for timing.
+    /// </summary>
     public static async Task TimersTimerDelay(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
@@ -100,6 +136,9 @@ public static class DelayExecutor
         using (delay.Token.Register(() => tcs.TrySetCanceled()))
             await tcs.Task;
     }
+    /// <summary>
+    /// System.Threading.Timer class method for timing.
+    /// </summary>
     public static async Task TimerDelay(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
@@ -108,6 +147,9 @@ public static class DelayExecutor
         using (delay.Token.Register(() => tcs.TrySetCanceled()))
             await tcs.Task;
     }
+    /// <summary>
+    /// Windows.Forms.Timer method for timing.
+    /// </summary>
     public static async Task FormsTimerDelay(DelayAction delay)
     {
         if (delay.DelayMilisecond <= 0) return;
