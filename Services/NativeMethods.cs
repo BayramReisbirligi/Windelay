@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 namespace ReisProduction.Windelay.Services;
-public static class Interop
+internal static class NativeMethods
 {
     [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
     internal static extern bool CloseHandle(nint hObject);

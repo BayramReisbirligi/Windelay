@@ -22,6 +22,10 @@
     <FileVersion>25.5.1.4</FileVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Platforms>x64</Platforms>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://reisproduction.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BayramReisbirligi/Windelay</RepositoryUrl>
+    <PackageReleaseNotes>Happy relase Windelay!</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -47,10 +51,22 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Update="ReisProduction.png">
       <PackagePath>\</PackagePath>
       <Pack>True</Pack>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="ReisProduction.Windelay.Services.NativeMethods">
+      <Static>True</Static>
+    </Using>
+    <Using Include="ReisProduction.Windelay.Utilities" />
+    <Using Include="ReisProduction.Windelay.Utilities.Enums" />
   </ItemGroup>
 
 </Project>
