@@ -1,23 +1,3 @@
-<p align="center">
-    <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" align="center" width="30%">
-</p>
-<p align="center"><h1 align="center">WINDELAY</h1></p>
-<p align="center">
-	<em>Mastering Delays, Optimizing Performance!</em>
-</p>
-<p align="center">
-	<img src="https://img.shields.io/github/license/BayramReisbirligi/Windelay?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
-	<img src="https://img.shields.io/github/last-commit/BayramReisbirligi/Windelay?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
-	<img src="https://img.shields.io/github/languages/top/BayramReisbirligi/Windelay?style=default&color=0080ff" alt="repo-top-language">
-	<img src="https://img.shields.io/github/languages/count/BayramReisbirligi/Windelay?style=default&color=0080ff" alt="repo-language-count">
-</p>
-<p align="center"><!-- default option, no dependency badges. -->
-</p>
-<p align="center">
-	<!-- default option, no dependency badges. -->
-</p>
-<br>
-
 ##  Table of Contents
 
 - [ Overview](#-overview)
@@ -29,10 +9,8 @@
   - [ Installation](#-installation)
   - [ Usage](#-usage)
   - [ Testing](#-testing)
-- [ Project Roadmap](#-project-roadmap)
 - [ Contributing](#-contributing)
 - [ License](#-license)
-- [ Acknowledgments](#-acknowledgments)
 
 ---
 
@@ -216,13 +194,6 @@ Run the test suite using the following command:
 
 
 ---
-##  Project Roadmap
-
-- [X] **`Task 1`**: <strike>Implement feature one.</strike>
-- [ ] **`Task 2`**: Implement feature two.
-- [ ] **`Task 3`**: Implement feature three.
-
----
 
 ##  Contributing
 
@@ -270,11 +241,5 @@ Run the test suite using the following command:
 ##  License
 
 This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
-
----
-
-##  Acknowledgments
-
-- List any resources, contributors, inspiration, etc. here.
 
 ---
