@@ -1,16 +1,13 @@
 ##  Table of Contents
 
-- [ Overview](#-overview)
-- [ Features](#-features)
-- [ Project Structure](#-project-structure)
-  - [ Project Index](#-project-index)
-- [ Getting Started](#-getting-started)
-  - [ Prerequisites](#-prerequisites)
-  - [ Installation](#-installation)
-  - [ Usage](#-usage)
-  - [ Testing](#-testing)
-- [ Contributing](#-contributing)
-- [ License](#-license)
+- [ Overview](#overview)
+- [ Features](#features)
+- [ Project Structure](#project-structure)
+  - [ Project Index](#project-index)
+- [ Getting Started](#getting-started)
+  - [ Prerequisites](#prerequisites)
+- [ Contributing](#contributing)
+- [ License](#license)
 
 ---
 
@@ -145,53 +142,6 @@ Before getting started with Windelay, ensure your runtime environment meets the 
 
 - **Programming Language:** CSharp
 - **Package Manager:** Nuget
-
-
-###  Installation
-
-Install Windelay using one of the following methods:
-
-**Build from source:**
-
-1. Clone the Windelay repository:
-```sh
-❯ git clone https://github.com/BayramReisbirligi/Windelay
-```
-
-2. Navigate to the project directory:
-```sh
-❯ cd Windelay
-```
-
-3. Install the project dependencies:
-
-
-**Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
-
-```sh
-❯ dotnet restore
-```
-
-
-
-
-###  Usage
-Run Windelay using the following command:
-**Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
-
-```sh
-❯ dotnet run
-```
-
-
-###  Testing
-Run the test suite using the following command:
-**Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
-
-```sh
-❯ dotnet test
-```
-
 
 ---
 
