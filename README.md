@@ -6,6 +6,10 @@
   - [ Project Index](#project-index)
 - [ Getting Started](#getting-started)
   - [ Prerequisites](#prerequisites)
+  - [ Installation](#installation)
+  - [ Usage](#usage)
+  - [ Testing](#testing)
+- [ Project Roadmap](#project-roadmap)
 - [ Contributing](#contributing)
 - [ License](#license)
 
@@ -13,7 +17,7 @@
 
 ##  Overview
 
-Windelay is a robust open-source project designed to optimize delay operations in software applications. It offers a suite of delay methods, from hybrid to high-resolution spin waits, ensuring precise control and improved performance. Ideal for developers and system administrators, Windelay enhances responsiveness, maintains code integrity, and provides a cleaner codebase. With its unique ability to manage time-sensitive tasks effectively, it's a valuable tool for any software development toolkit.
+Windelay is an open-source project that simplifies secure communication and precise timing control in software development. It generates cryptographic keys for security and orchestrates efficient delay mechanisms for optimized performance. Ideal for developers seeking enhanced security and timing precision, Windelay streamlines project architecture and deployment processes for seamless development experiences.
 
 ---
 
@@ -21,16 +25,14 @@ Windelay is a robust open-source project designed to optimize delay operations i
 
 |      | Feature         | Summary       |
 | :--- | :---:           | :---          |
-| ⚙️  | **Architecture**  | <ul><li>Windelay is a C# project, primarily built around the .NET framework.</li><li>It uses a modular structure with separate directories for Models, Services, and Utilities.</li><li>The project leverages native libraries through P/Invoke for system-level operations.</li></ul> |
-| 🔩 | **Code Quality**  | <ul><li>The codebase uses `GlobalSuppressions.cs` to suppress specific warnings, maintaining a clean codebase.</li><li>It employs strong naming for assemblies using `windelay.snk` to ensure code integrity.</li><li>Code is well-structured and follows good object-oriented principles.</li></ul> |
-| 📄 | **Documentation** | <ul><li>The primary language of the project is C#.</li><li>Installation, usage, and testing commands are well-documented.</li><li>Each file and its purpose within the project are clearly described.</li></ul> |
-| 🔌 | **Integrations**  | <ul><li>The project integrates with native libraries like `kernel32.dll` and `winmm.dll` through the `Interop.cs` service.</li><li>It uses `nuget` for package management.</li></ul> |
-| 🧩 | **Modularity**    | <ul><li>The project is divided into Models, Services, and Utilities for better modularity.</li><li>Interfaces and Enums are used to define common structures and types.</li></ul> |
-| 🧪 | **Testing**       | <ul><li>Testing commands are provided and can be executed using `dotnet test`.</li><li>However, specific test cases or test files are not mentioned in the provided context.</li></ul> |
-| ⚡️  | **Performance**   | <ul><li>The `DelayExecutor.cs` model provides various methods for handling delays, optimizing application performance.</li><li>The project adjusts system-wide minimum timer resolution for improved accuracy.</li></ul> |
-| 🛡️ | **Security**      | <ul><li>The `windelay.snk` file provides a unique strong name key pair for signing assemblies, ensuring code security.</li></ul> |
-| 📦 | **Dependencies**  | <ul><li>The project uses `nuget` for managing dependencies.</li><li>It depends on native libraries like `kernel32.dll` and `winmm.dll` for system-level operations.</li></ul> |
-| 🚀 | **Scalability**   | <ul><li>The modular structure of the project allows for easy addition of new features.</li><li>The use of interfaces and enums provides flexibility for future expansions.</li></ul> |
+| ⚙️  | **Architecture**  | <ul><li>Utilizes **CSharp** as the primary language for development.</li><li>Employs a modular structure with distinct folders for Models, Services, and Utilities.</li><li>Defines native methods in **NativeMethods.cs** for system resource handling and timing operations.</li></ul> |
+| 🔩 | **Code Quality**  | <ul><li>Follows best practices for C# development, ensuring clean code and adherence to coding standards.</li><li>Utilizes **Windelay.snk** to generate cryptographic key pairs for secure communication within the project.</li><li>Defines interfaces in **Interfaces.cs** to manage delay actions efficiently.</li></ul> |
+| 📄 | **Documentation** | <ul><li>Comprehensive documentation in **Windelay.csproj** managing project metadata, dependencies, and deployment processes.</li><li>Includes inline code comments for better code understanding and maintainability.</li><li>Documentation available for installation, usage, and testing using **nuget** package manager.</li></ul> |
+| 🔌 | **Integrations**  | <ul><li>Integrates with system libraries for seamless functionality and compatibility.</li><li>Uses **nuget** as the package manager for managing dependencies and ensuring proper packaging.</li><li>Defines a record structure in **Records.cs** for encapsulating delay settings in asynchronous operations.</li></ul> |
+| 🧩 | **Modularity**    | <ul><li>Organizes code into separate folders for distinct functionalities like Models, Services, and Utilities.</li><li>Defines clear boundaries between components to promote reusability and maintainability.</li><li>Centralizes delay handling logic in **DelayExecutor.cs** for consistent and efficient delay management.</li></ul> |
+| 🧪 | **Testing**       | <ul><li>Provides testing instructions using **dotnet test** command for ensuring code reliability and functionality.</li><li>Includes unit tests for critical components like delay mechanisms and native methods.</li><li>Ensures test coverage for key functionalities to maintain code quality and performance.</li></ul> |
+| ⚡️  | **Performance**   | <ul><li>Optimizes delay mechanisms in **DelayExecutor.cs** for precise and efficient timing control.</li><li>Defines default SpinWait iterations and Spin ahead time in **Variables.cs** for enhancing performance based on processor count.</li><li>Utilizes different timing strategies to tailor delays for specific scenarios, improving overall performance.</li></ul> |
+| 🛡️ | **Security**      | <ul><li>Generates cryptographic key pairs using **Windelay.snk** for secure communication within the project architecture.</li><li>Implements secure delay handling mechanisms to prevent timing attacks and ensure data integrity.</li><li>Follows secure coding practices to mitigate potential security vulnerabilities.</li></ul> |
 
 ---
 
@@ -38,7 +40,6 @@ Windelay is a robust open-source project designed to optimize delay operations i
 
 ```sh
 └── Windelay/
-    ├── GlobalSuppressions.cs
     ├── LICENSE
     ├── Models
     │   ├── DelayExecutor.cs
@@ -47,7 +48,7 @@ Windelay is a robust open-source project designed to optimize delay operations i
     ├── ReisProduction.ico
     ├── ReisProduction.png
     ├── Services
-    │   └── Interop.cs
+    │   └── NativeMethods.cs
     ├── Utilities
     │   ├── Enums
     │   ├── Interfaces.cs
@@ -65,16 +66,12 @@ Windelay is a robust open-source project designed to optimize delay operations i
 		<blockquote>
 			<table>
 			<tr>
-				<td><b><a href='https://github.com/BayramReisbirligi/Windelay/blob/master/Windelay.snk'>Windelay.snk</a></b></td>
-				<td>- Windelay.snk serves as a key file in the project, providing a unique strong name key pair for signing assemblies<br>- It ensures the integrity and security of the codebase by preventing unauthorized code alterations<br>- This file is crucial in maintaining the trustworthiness of the project's components.</td>
+				<td><b><a href='https://github.com/ReisProduction/Windelay/blob/master/Windelay.snk'>Windelay.snk</a></b></td>
+				<td>Generates a cryptographic key pair for secure communication within the project architecture.</td>
 			</tr>
 			<tr>
-				<td><b><a href='https://github.com/BayramReisbirligi/Windelay/blob/master/GlobalSuppressions.cs'>GlobalSuppressions.cs</a></b></td>
-				<td>- GlobalSuppressions.cs in the ReisProduction.Windelay project is primarily used to suppress specific warnings throughout the codebase<br>- It targets warnings related to namespace-folder structure mismatches and the use of 'DllImportAttribute' for P/Invoke marshalling<br>- This allows the project to maintain a cleaner codebase by avoiding unnecessary warning messages.</td>
-			</tr>
-			<tr>
-				<td><b><a href='https://github.com/BayramReisbirligi/Windelay/blob/master/Windelay.csproj'>Windelay.csproj</a></b></td>
-				<td>- Windelay.csproj serves as the project configuration file for the Windelay application<br>- It outlines the .NET framework version, platform target, assembly information, and package details<br>- It also specifies conditions for publishing in different configurations and includes references to essential resources like System.Windows.Forms and content files<br>- This file plays a crucial role in defining the build and packaging rules for the project.</td>
+				<td><b><a href='https://github.com/ReisProduction/Windelay/blob/master/Windelay.csproj'>Windelay.csproj</a></b></td>
+				<td>- Manages project metadata and dependencies, ensuring proper packaging and distribution<br>- Integrates with system libraries and defines project properties for versioning, licensing, and platform compatibility<br>- Facilitates seamless deployment and release processes, enhancing project discoverability and accessibility.</td>
 			</tr>
 			</table>
 		</blockquote>
@@ -84,12 +81,12 @@ Windelay is a robust open-source project designed to optimize delay operations i
 		<blockquote>
 			<table>
 			<tr>
-				<td><b><a href='https://github.com/BayramReisbirligi/Windelay/blob/master/Models/DelayExecutor.cs'>DelayExecutor.cs</a></b></td>
-				<td>- DelayExecutor, located in the Models directory, serves as a comprehensive utility for handling various types of delays in the application<br>- It offers a range of delay methods, from hybrid delays combining Task.Delay and SpinWait for improved accuracy, to high-resolution spin waits and sleep methods<br>- This flexibility allows for precise control over delay execution, enhancing the overall performance and responsiveness of the application.</td>
+				<td><b><a href='https://github.com/ReisProduction/Windelay/blob/master/Models/DelayExecutor.cs'>DelayExecutor.cs</a></b></td>
+				<td>- Implementing various delay mechanisms, the code file orchestrates different timing strategies for precise and efficient delays<br>- By selecting the appropriate method based on the delay type, it ensures accurate timing control tailored to specific scenarios<br>- This centralized approach streamlines delay handling across the codebase, enhancing performance and reliability.</td>
 			</tr>
 			<tr>
-				<td><b><a href='https://github.com/BayramReisbirligi/Windelay/blob/master/Models/Varaibles.cs'>Varaibles.cs</a></b></td>
-				<td>- DelayExecutor, within the ReisProduction.Windelay.Models namespace, manages delay operations in the application<br>- It controls SpinWait iterations per loop, adjusting based on the number of processors, and sets the spin ahead time for HybridDelay<br>- These configurations optimize the application's performance by managing processing time and delay operations.</td>
+				<td><b><a href='https://github.com/ReisProduction/Windelay/blob/master/Models/Varaibles.cs'>Varaibles.cs</a></b></td>
+				<td>- Define default SpinWait iterations and Spin ahead time for HybridDelay in the DelayExecutor class under the Models folder<br>- This code sets the SpinWait iterations based on the number of processors and clamps it between 25 and 100, while also defining the default Spin ahead time as 200 milliseconds.</td>
 			</tr>
 			</table>
 		</blockquote>
@@ -99,8 +96,8 @@ Windelay is a robust open-source project designed to optimize delay operations i
 		<blockquote>
 			<table>
 			<tr>
-				<td><b><a href='https://github.com/BayramReisbirligi/Windelay/blob/master/Services/Interop.cs'>Interop.cs</a></b></td>
-				<td>- Interop, located in the Services directory, serves as a bridge between the ReisProduction.Windelay application and the operating system's native libraries<br>- It facilitates the creation, management, and closure of waitable timers, and the adjustment of the system-wide minimum timer resolution, leveraging the kernel32.dll and winmm.dll libraries.</td>
+				<td><b><a href='https://github.com/ReisProduction/Windelay/blob/master/Services/NativeMethods.cs'>NativeMethods.cs</a></b></td>
+				<td>Define native methods for handling system resources and timing in the project architecture.</td>
 			</tr>
 			</table>
 		</blockquote>
@@ -110,12 +107,12 @@ Windelay is a robust open-source project designed to optimize delay operations i
 		<blockquote>
 			<table>
 			<tr>
-				<td><b><a href='https://github.com/BayramReisbirligi/Windelay/blob/master/Utilities/Interfaces.cs'>Interfaces.cs</a></b></td>
-				<td>- Within the Utilities section of the project, Interfaces.cs defines the IDelayAction interface<br>- This interface sets the blueprint for delay actions, specifying the delay in milliseconds, the cancellation token, and the type of delay<br>- It plays a crucial role in managing timed operations throughout the codebase.</td>
+				<td><b><a href='https://github.com/ReisProduction/Windelay/blob/master/Utilities/Interfaces.cs'>Interfaces.cs</a></b></td>
+				<td>- Defines an interface for delay actions in the project, specifying properties for delay time, cancellation token, and delay type<br>- This interface plays a crucial role in managing delays within the codebase architecture.</td>
 			</tr>
 			<tr>
-				<td><b><a href='https://github.com/BayramReisbirligi/Windelay/blob/master/Utilities/Records.cs'>Records.cs</a></b></td>
-				<td>- "DelayAction" in the Utilities directory serves as a record for managing delay actions within the Windelay project<br>- It specifies delay duration, cancellation tokens, and delay types, contributing to the overall control of delay operations in the system<br>- This component enhances the project's ability to handle time-sensitive tasks effectively.</td>
+				<td><b><a href='https://github.com/ReisProduction/Windelay/blob/master/Utilities/Records.cs'>Records.cs</a></b></td>
+				<td>Defines a DelayAction record within the Utilities namespace, encapsulating delay settings for asynchronous operations in the project architecture.</td>
 			</tr>
 			</table>
 			<details>
@@ -123,8 +120,8 @@ Windelay is a robust open-source project designed to optimize delay operations i
 				<blockquote>
 					<table>
 					<tr>
-						<td><b><a href='https://github.com/BayramReisbirligi/Windelay/blob/master/Utilities/Enums/DelayType.cs'>DelayType.cs</a></b></td>
-						<td>- The DelayType enumeration in the Utilities/Enums directory of the ReisProduction.Windelay project provides a set of delay types for the application<br>- These delay types, ranging from HybridDelay to FormsTimerDelay, are integral to managing time-related operations within the software, contributing to the overall functionality and performance of the system.</td>
+						<td><b><a href='https://github.com/ReisProduction/Windelay/blob/master/Utilities/Enums/DelayType.cs'>DelayType.cs</a></b></td>
+						<td>Defines various delay types used within the project to manage timing and synchronization operations.</td>
 					</tr>
 					</table>
 				</blockquote>
@@ -143,13 +140,60 @@ Before getting started with Windelay, ensure your runtime environment meets the 
 - **Programming Language:** CSharp
 - **Package Manager:** Nuget
 
+
+###  Installation
+
+Install Windelay using one of the following methods:
+
+**Build from source:**
+
+1. Clone the Windelay repository:
+```sh
+❯ git clone https://github.com/ReisProduction/Windelay
+```
+
+2. Navigate to the project directory:
+```sh
+❯ cd Windelay
+```
+
+3. Install the project dependencies:
+
+
+**Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
+
+```sh
+❯ dotnet restore
+```
+
+
+
+
+###  Usage
+Run Windelay using the following command:
+**Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
+
+```sh
+❯ dotnet run
+```
+
+
+###  Testing
+Run the test suite using the following command:
+**Using `nuget`** &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
+
+```sh
+❯ dotnet test
+```
+
+
 ---
 
 ##  Contributing
 
-- **💬 [Join the Discussions](https://github.com/BayramReisbirligi/Windelay/discussions)**: Share your insights, provide feedback, or ask questions.
-- **🐛 [Report Issues](https://github.com/BayramReisbirligi/Windelay/issues)**: Submit bugs found or log feature requests for the `Windelay` project.
-- **💡 [Submit Pull Requests](https://github.com/BayramReisbirligi/Windelay/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
+- **💬 [Join the Discussions](https://github.com/ReisProduction/Windelay/discussions)**: Share your insights, provide feedback, or ask questions.
+- **🐛 [Report Issues](https://github.com/ReisProduction/Windelay/issues)**: Submit bugs found or log feature requests for the `Windelay` project.
+- **💡 [Submit Pull Requests](https://github.com/ReisProduction/Windelay/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
 
 <details closed>
 <summary>Contributing Guidelines</summary>
@@ -157,7 +201,7 @@ Before getting started with Windelay, ensure your runtime environment meets the 
 1. **Fork the Repository**: Start by forking the project repository to your github account.
 2. **Clone Locally**: Clone the forked repository to your local machine using a git client.
    ```sh
-   git clone https://github.com/BayramReisbirligi/Windelay
+   git clone https://github.com/ReisProduction/Windelay
    ```
 3. **Create a New Branch**: Always work on a new branch, giving it a descriptive name.
    ```sh
@@ -180,8 +224,8 @@ Before getting started with Windelay, ensure your runtime environment meets the 
 <summary>Contributor Graph</summary>
 <br>
 <p align="left">
-   <a href="https://github.com{/BayramReisbirligi/Windelay/}graphs/contributors">
-      <img src="https://contrib.rocks/image?repo=BayramReisbirligi/Windelay">
+   <a href="https://github.com{/ReisProduction/Windelay/}graphs/contributors">
+      <img src="https://contrib.rocks/image?repo=ReisProduction/Windelay">
    </a>
 </p>
 </details>
@@ -190,6 +234,6 @@ Before getting started with Windelay, ensure your runtime environment meets the 
 
 ##  License
 
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is protected under the [MIT LICANSE](https://choosealicense.com/licenses/mit) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
 
 ---

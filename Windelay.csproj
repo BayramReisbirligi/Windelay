@@ -24,7 +24,7 @@
     <Platforms>x64</Platforms>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageProjectUrl>https://reisproduction.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/BayramReisbirligi/Windelay</RepositoryUrl>
+    <RepositoryUrl>https://github.com/ReisProduction/Windelay</RepositoryUrl>
     <PackageReleaseNotes>Happy relase Windelay!</PackageReleaseNotes>
   </PropertyGroup>
 
