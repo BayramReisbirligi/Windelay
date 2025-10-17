@@ -134,7 +134,7 @@ public static partial class DelayExecutor
             await tcs.Task;
     }
     /// <summary>
-    /// System.Threading.Timer class method for timing.
+    /// System.Threading.Timer method for timing.
     /// </summary>
     public static async Task TimerDelay(DelayAction delay)
     {
