@@ -8,18 +8,18 @@
     <PlatformTarget>x64</PlatformTarget>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>Windelay.snk</AssemblyOriginatorKeyFile>
-    <Version>26.5.4</Version>
+    <Version>26.5.5</Version>
     <Title>$(AssemblyName)</Title>
     <Authors>ReisProduction</Authors>
     <Product>$(Authors)</Product>
     <Copyright>Copyright Reis Production 2025</Copyright>
-    <Description>Windelay</Description>
+    <Description>Precise and customizable delay.</Description>
     <PackageIcon>ReisProduction.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>Windelay</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <AssemblyVersion>26.5.4.4</AssemblyVersion>
-    <FileVersion>26.5.4.4</FileVersion>
+    <AssemblyVersion>26.5.5.1</AssemblyVersion>
+    <FileVersion>26.5.5.1</FileVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Platforms>x64</Platforms>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
